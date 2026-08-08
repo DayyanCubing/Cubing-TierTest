@@ -1,0 +1,14 @@
+name: Update WCA Data
+
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron "0 0 * * *"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test Github Actions
+        run: echo "Github Actions works!"
