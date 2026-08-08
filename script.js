@@ -19,9 +19,22 @@ const fourBLD = document.getElementById("fourBLD");
 const fiveBLD = document.getElementById("fiveBLD");
 
 const submitBTN = document.getElementById("submit");
+//The percentiles for each tier. These are the lower bounds. 
+const tierpercentiles = {
+    "F": 0,
+    "E": 20,
+    "D": 40,
+    "C": 70,
+    "B": 90,
+    "A": 99,
+    "A+": 99.9,
+    "S": 99.99,
+    "S+": 99.999,
+    "SS": 99.9999
+};
 
 //The scores for each tier
-const tiers = {
+const tierscores = {
     "F": 0,
     "E": 1,
     "D": 2,
@@ -42,7 +55,16 @@ const weights = {
     "FIVE": 2,
     "SIX": 2,
     "SEVEN": 2,
-
+    "OH": 2,
+    "MEGAMINX": 2,
+    "PYRAMINX": 2,
+    "CLOCK": 1, //This will remain here until it is removed from WCA when it will be considered
+    "SQ1": 1,
+    "SKEWB": 1,
+    "FTO": 0,  //This is not yet a WCA event. It will have a weight of 2
+    "THREEBLD": 1,
+    "FOURBLD": 1,
+    "FIVEBLD": 1
 };
 submitBTN.addEventListener("click", () => {
     //on button click
