@@ -10,5 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test Github Actions
-        run: echo "Github Actions works!"
+      - name: Check WCA Export
+        run: |
+          curl  https://www.worldcubeassociation.org/api/v0/export/public
