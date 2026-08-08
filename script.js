@@ -18,6 +18,25 @@ const threeBLD = document.getElementById("threeBLD");
 const fourBLD = document.getElementById("fourBLD");
 const fiveBLD = document.getElementById("fiveBLD");
 
+const events = [
+    two,
+    three,
+    four,
+    five,
+    six,
+    seven,
+    oh,
+    megaminx,
+    pyraminx,
+    clock,
+    sq1,
+    fto,
+    skewb,
+    threeBLD,
+    fourBLD,
+    fiveBLD
+];
+
 const submitBTN = document.getElementById("submit");
 //The percentiles for each tier. These are the lower bounds. 
 const tierpercentiles = {
@@ -66,7 +85,21 @@ const weights = {
     "FOURBLD": 1,
     "FIVEBLD": 1
 };
+
+function calculate() {
+    const times = events.map(event => {
+        if (event.value === "") {
+            return null;
+        }
+    
+        return Number(event.value);
+    });
+}
+
+
+
+
 submitBTN.addEventListener("click", () => {
     //on button click
-    console.log("everything works fine")
+    calculate()
 });
