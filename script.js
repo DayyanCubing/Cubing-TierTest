@@ -45,6 +45,25 @@ const eventIDs = [
     "555bf"
 ];
 
+const weightIDs = [
+    "TWO",
+    "THREE",
+    "FOUR",
+    "FIVE",
+    "SIX",
+    "SEVEN",
+    "OH",
+    "MEGAMINX",
+    "PYRAMINX",
+    "CLOCK",
+    "SQ1",
+    //"FTO",
+    "SKEWB",
+    "THREEBLD",
+    "FOURBLD",
+    "FIVEBLD"
+]
+
 const events = [
     two,
     three,
@@ -132,6 +151,15 @@ function inTier(event,time) {
     return null;
 }
 
+function scoreToTier(score) {
+    for (const tier in tierscores) {
+        if (tierscores[tier] == score) {
+            return tier;
+        }
+    }
+    return null;
+}
+
 
 function calculate() {
     const times = events.map(event => {
@@ -143,8 +171,8 @@ function calculate() {
     });
 
     const eventTiers = times.map((time,index) => {
-        if (time === "null") {
-            return null
+        if (time === null) {
+            return null;
         }
 
         const event = eventIDs[index]
@@ -159,6 +187,22 @@ function calculate() {
     });
     
     //weighted average
+    let weightedTotal = 0;
+    let Total = 0;
+
+    eventTiers.forEach((result,index) => {
+        if (result === null) {
+            return;
+        }
+        const weightId = weightIDs[index]
+        const weight = weights[weightId];
+        weightedTotal += weight * result.score;
+        Total += weight;
+    });
+
+    const overallScore = weightedTotal/Total;
+    const overallTier = scoreToTier(overallScore);
+    console.log(overallTier);
 }
 
 
