@@ -24,9 +24,26 @@ fetch("data/cutoffs.json")
     .then(data => {
         cutoffs = data;
 
-        console.log(cutoffs);
-        console.log(inTier("333", 10));
     });
+
+const eventIDs = [
+    "222",
+    "333",
+    "444",
+    "555",
+    "666",
+    "777",
+    "333oh",
+    "minx",
+    "pyram",
+    "clock",
+    "sq1",
+    //"fto",
+    "skewb",
+    "333bf",
+    "444bf",
+    "555bf"
+];
 
 const events = [
     two,
@@ -40,7 +57,7 @@ const events = [
     pyraminx,
     clock,
     sq1,
-    fto,
+    //fto,
     skewb,
     threeBLD,
     fourBLD,
@@ -73,7 +90,8 @@ const tierscores = {
     "A+": 6,
     "S": 7,
     "S+": 8,
-    "SS": 9
+    "SS": 9,
+    null: null
 };
 
 //The weights of the events
@@ -100,11 +118,17 @@ function inTier(event,time) {
     const tierOrder = ["SS", "S+", "S", "A+", "A", "B", "C", "D", "E", "F"];
 
     for (const tier of tierOrder) {
+        if (time === null) {
+            return null;
+        }
+
         if (time <= cutoffs[event][tier]) {
-            return tier
+            return tier;
         }
     }
-
+    if (time > cutoffs[event]["F"]) {
+        return "F";
+    }
     return null;
 }
 
@@ -117,6 +141,24 @@ function calculate() {
     
         return Number(event.value);
     });
+
+    const eventTiers = times.map((time,index) => {
+        if (time === "null") {
+            return null
+        }
+
+        const event = eventIDs[index]
+        const tier = inTier(event, time)
+
+        return {
+            event: event,
+            time: time,
+            tier: tier,
+            score: tierscores[tier]
+        };
+    });
+    
+    //weighted average
 }
 
 
