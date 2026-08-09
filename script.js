@@ -18,6 +18,11 @@ const threeBLD = document.getElementById("threeBLD");
 const fourBLD = document.getElementById("fourBLD");
 const fiveBLD = document.getElementById("fiveBLD");
 
+
+
+const resultDiv = document.getElementById("result");
+const breakdownDiv = document.getElementById("breakdown");
+
 let cutoffs;
 fetch("data/cutoffs.json")
     .then(response => response.json())
@@ -202,7 +207,9 @@ function calculate() {
 
     const overallScore = weightedTotal/Total;
     const overallTier = scoreToTier(overallScore);
-    console.log(overallTier);
+
+    //show result
+    resultDiv.textContent = `${overallTier} Tier`; 
 }
 
 
