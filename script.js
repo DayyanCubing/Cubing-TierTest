@@ -18,6 +18,16 @@ const threeBLD = document.getElementById("threeBLD");
 const fourBLD = document.getElementById("fourBLD");
 const fiveBLD = document.getElementById("fiveBLD");
 
+let cutoffs;
+fetch("data/cutoffs.json")
+    .then(response => response.json())
+    .then(data => {
+        cutoffs = data;
+
+        console.log(cutoffs);
+        console.log(inTier("333", 10));
+    });
+
 const events = [
     two,
     three,
@@ -80,11 +90,24 @@ const weights = {
     "CLOCK": 1, //This will remain here until it is removed from WCA when it will be considered
     "SQ1": 1,
     "SKEWB": 1,
-    "FTO": 0,  //This is not yet a WCA event. It will have a weight of 2
+      //This is not yet a WCA event. It will have a weight of 2. FTO, that is
     "THREEBLD": 1,
     "FOURBLD": 1,
     "FIVEBLD": 1
 };
+
+function inTier(event,time) {
+    const tierOrder = ["SS", "S+", "S", "A+", "A", "B", "C", "D", "E", "F"];
+
+    for (const tier of tierOrder) {
+        if (time <= cutoffs[event][tier]) {
+            return tier
+        }
+    }
+
+    return null;
+}
+
 
 function calculate() {
     const times = events.map(event => {
@@ -102,4 +125,5 @@ function calculate() {
 submitBTN.addEventListener("click", () => {
     //on button click
     calculate()
+    
 });
