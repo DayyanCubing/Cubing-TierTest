@@ -206,7 +206,7 @@ function calculate() {
     });
 
     const overallScore = weightedTotal/Total;
-    const overallTier = scoreToTier(overallScore);
+    const overallTier = scoreToTier(Math.floor(overallScore));
 
     //show result
     resultDiv.textContent = `${overallTier} Tier`; 
